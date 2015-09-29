@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserService {
     public void test(){
+
         System.out.println("this is test");
     }
 }
