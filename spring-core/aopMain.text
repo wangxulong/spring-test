@@ -1,0 +1,19 @@
+AOP术语：
+1.通知（advice）:before After Around After-returning After-throwing
+
+2.连接点(join point):在应用程序中能够插入切面的点
+
+3.切点(pointcut)：匹配通知所要植入的一个或多个连接点
+
+4.切面（Aspect）：通知和切点的结合。
+
+5.引入（Introduction）
+
+6.织入（Weaving）:
+Spring AOP框架的一些关键点:
+1.Spring 通知是Java编写的
+2.Spring在运行期间通知对象
+3.Spring只支持方法连接点
+
+spring AOP仅支持AspectJ切点指示器的一个子集：
+arg():限制连接点匹配参数为制定类型的执行方法。
