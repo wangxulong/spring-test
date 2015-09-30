@@ -1,16 +1,24 @@
 package com.wang.entity;
 
-import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 
 /**
  * Created by wxl on 2015/9/29.
  */
-@Component
+@Entity
+@Table(name = "tb_user")
 public class SysUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "login_name")
     private String name;
+    @Column(name = "login_password")
     private String password;
+    @Column(name = "real_name")
     private String nickName;
+    @Column(name = "email")
     private String email;
 
     public Long getId() {

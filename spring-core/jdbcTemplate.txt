@@ -1,0 +1,55 @@
+JdbcTemplate主要支持五类方法：
+1.execute 方法：可以执行任何SQL语句，一般是DDL语句
+2.update/batchUpdate方法：update方法主要执行新增/修改/删除等语句；batchUpdate主要是批处理
+3.query/queryForObject/queryForList：执行查询相关的语句
+4.call方法：用户执行存储过程/函数。
+
+JdbcTemplate类支持的回调类：
+1.预编译语句以及存储过程创建回掉：用于根据JdbcTemplate提供的链接创建相应的语句
+    PreparedStatementCreator:通过回调获取JdbcTemplate提供的Connection,由用户使用该Connection
+                             创建相关的PreparedStatement.
+    CallableStatementCreator：通过回调获取JdbcTemplate提供的Connection，
+                               由用户使用该Connection创建相关的CallableStatement；
+2.预编译语句设值回调：用于给预编译语句相应参数设值
+    PreparedStatementSetter：通过回调获取JdbcTemplate提供的PreparedStatement，
+                              由用户来对相应的预编译语句相应参数设值；
+    BatchPreparedStatementSetter：；类似于PreparedStatementSetter，但用于批处理，需要指定批处理大小；
+
+3.自定义功能回调：提供给用户一个扩展点，用户可以在指定类型的扩展点执行任何数量需要的操作；
+    ConnectionCallback：通过回调获取JdbcTemplate提供的Connection，用户可在该Connection执行任何数量的操作；
+    StatementCallback：通过回调获取JdbcTemplate提供的Statement，用户可以在该Statement执行任何数量的操作；
+    PreparedStatementCallback：通过回调获取JdbcTemplate提供的PreparedStatement，用户可以在该PreparedStatement执行任何数量的操作；
+    CallableStatementCallback：通过回调获取JdbcTemplate提供的CallableStatement，用户可以在该CallableStatement执行任何数量的操作；
+
+4.结果集处理回调：通过回调处理ResultSet或将ResultSet转换为需要的形式；
+    RowMapper:用于将结果集每行数据转换为需要的类型，用户需要实现方法mapRow(ResultSet rs,int rowNumber)来完成
+              将每行的数据类型转为相应的类型。
+    RowCallbackHandler:用于处理ResultSet的每一行结果，用户需要实现processRow(ResultSet rs)来完成处理
+           在该回调函数中无需执行rs.next()，该操作由JdbcTemplate来执行，用户只需要按行获取数据然后处理即可。
+    ResultSetExtractor:用户结果集数据提取，用户需要实现extractData(ResultSet rs)来处理结果，用户必须处理掉整个结果集。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

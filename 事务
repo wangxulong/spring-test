@@ -1,0 +1,14 @@
+Spring对声明式事务的支持是通过Spring AOP框架实现的；
+声明事务更好的方式是：spring的tx命名空间和@Transactional注解
+定义事务属性
+在spring中，声明式事务是通过事务属性来定义的。事务属性描述了事务策略如何应用到方法上。
+1.传播行为(propagation behavior):定义了客户端与被调用方法之间的事务边界。
+    传播规则定义的何时要创建一个事务或何时使用已有的事务。
+    propagation_mandatory
+    propagation_nested
+    propagation_never
+    propagation_not_supported
+    propagation_required
+    propagation_requires_new
+    propagation_supports
+2.隔离级别：定义一个事务可能受其他事务影响的程度。

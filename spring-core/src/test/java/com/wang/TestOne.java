@@ -23,7 +23,7 @@ public class TestOne extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testOne(){
-        sysUserService.test();
+       // sysUserService.test();
         testLogger.info("wangxulong");
     }
 
