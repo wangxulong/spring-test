@@ -5,6 +5,7 @@ import com.wang.entity.SysUser;
 import com.wang.service.SysUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,7 +39,7 @@ public class HibernateTest extends AbstractJUnit4SpringContextTests {
             System.out.println(user.getNickName());
         }
     }*/
-    @Resource
+    @Autowired
     private SysUserService sysUserService;
     @Test
     public void run(){

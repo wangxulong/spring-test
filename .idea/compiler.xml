@@ -23,11 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="spring-core" />
+        <module name="spring-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="spring-core" target="1.5" />
       <module name="spring-test" target="1.5" />
+      <module name="spring-web" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
