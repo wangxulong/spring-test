@@ -1,0 +1,35 @@
+1.配置根：
+log4j.rootLogger=[level],appenderName,appenderName
+
+level是日志的优先级，通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。如：
+指定级别为INFO，则DEBUG级别的日志将不被打印出。
+2.配置日志信息输出目的地Appender,语法为：
+   log4j.appender.appenderName = fully.qualified.name.of.appender.class
+   log4j.appender.appenderName.option1 = value1
+3.配置日志信息的格式（布局）：
+   log4j.appender.appenderName.layout = fully.qualified.name.of.layout.class
+   log4j.appender.appenderName.layout.option1 = value1
+
+输出方式：
+RollingFileAppender:滚动文件，自动记录最新的文件
+ConsoleAppender:控制台
+FileAppender:文件
+DailyRollingFileAppender:每天产生一个日志文件
+WriterAppender:将日志信息以流格式发送到任意指定位置。
+日志优先级
+OFF/FATAL/ERROR/WARN/INFO/DEBUG/ALL
+log4j建议使用FATAL/ERROR/WARN/INFO/DEBUG
+
+log4j提供的layout
+HTMLLayout:以HTML表格布局
+PattenLayout:可以灵活的指定布局模式
+SimpleLayout:包含日志信息的级别和信息字符串
+TTCCLayout:包含日志产生的时间/线程/类别等信息
+
+Log4j采用类似C语言printf函数打印格式格式化日志信息，打印参数如下：
+%m:输出代码为指定的消息
+%p:输出优先级，
+%c:输出所属类
+%t:输出日志事件的线程名
+%d:输出日志时间点的时间或日期
+%l:输出日志事件发生的位置

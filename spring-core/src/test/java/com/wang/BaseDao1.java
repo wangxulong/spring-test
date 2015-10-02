@@ -1,22 +1,18 @@
-package com.wang.dao;
+package com.wang;
 
-import com.wang.entity.SysUser;
+import com.wang.auth.sys.entity.SysUser;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wxl on 2015/9/29.
+ * Created by wxl on 2015/10/1.
  */
-@Repository
-public class SysUserDao  {
-    @Resource
+
+public class BaseDao1 {
     private JdbcTemplate jdbcTemplate;
 
     /**
@@ -66,7 +62,7 @@ public class SysUserDao  {
 
     /**
      * RowMapper接口提供mapRow(ResultSet rs, int rowNum)方法将结果集的每一行转换为一个Map，
-         * 当然可以转换为其他类，如表的对象画形式。
+     * 当然可以转换为其他类，如表的对象画形式。
      * @return
      */
     public List<SysUser> getAllSysUser(){

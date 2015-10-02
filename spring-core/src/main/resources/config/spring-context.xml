@@ -10,7 +10,6 @@
         http://www.springframework.org/schema/tx
          http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
     <!--注解扫描装配bean-->
-    <context:component-scan base-package="com.wang.service"/>
     <context:component-scan base-package="com.wang"/>
 
     <!--数据源配置-->
@@ -38,38 +37,18 @@
         <constructor-arg ref="dataSource"></constructor-arg>
     </bean>
 
-  <!--  <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.wang.entity"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-            </props>
-        </property>
 
-    </bean>-->
-
-<!--    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>-->
-   <!-- <tx:annotation-driven transaction-manager="transactionManager"/>
--->
-   <!-- <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>-->
     <!-- JPA实体管理工厂的配置 -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-        <property name="packagesToScan" value="com.wang.entity"/><!--待扫描的实体类包，不再需要persistence.xml了-->
+        <property name="packagesToScan" value="com.wang"/><!--待扫描的实体类包，不再需要persistence.xml了-->
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
                 <prop key="hibernate.show_sql">true</prop>
-              <!--  <prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <prop key="hibernate.format_sql">true</prop>
+                <!--  <prop key="hibernate.hbm2ddl.auto">update</prop>-->
             </props>
         </property>
     </bean>
@@ -84,7 +63,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <jpa:repositories base-package="com.wang.dao"
+    <jpa:repositories base-package="com.wang"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManager"/>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />

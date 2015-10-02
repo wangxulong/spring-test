@@ -1,4 +1,4 @@
-package com.wang.entity;
+package com.wang.auth.sys.entity;
 
 
 import javax.persistence.*;

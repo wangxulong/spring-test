@@ -11,6 +11,7 @@
     <modules>
         <module>spring-core</module>
         <module>spring-web</module>
+        <module>school-test</module>
     </modules>
 
 
