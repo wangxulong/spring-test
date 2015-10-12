@@ -28,7 +28,13 @@ public class SysUserController {
 
     @RequestMapping("login")
     public String login(String name,String password){
-        sysUserService.login(name,password);
+        try{
+            sysUserService.login(name,password);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("登录名或密码错误");
+        }
+
         return "admin/index";
     }
 }
