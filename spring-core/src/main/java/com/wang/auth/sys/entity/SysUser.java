@@ -1,40 +1,34 @@
 package com.wang.auth.sys.entity;
 
-
 import javax.persistence.*;
 
 /**
- * Created by wxl on 2015/9/29.
+ * Created by wxl on 2015/10/12.
  */
 @Entity
-@Table(name = "tb_user")
-public class SysUser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "login_name")
-    private String name;
-    @Column(name = "login_password")
+@Table(name = "sys_user")
+public class SysUser extends BaseEntity{
+
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "password")
     private String password;
-    @Column(name = "real_name")
-    private String nickName;
-    @Column(name = "email")
-    private String email;
+    @Column(name = "salt")
+    private String salt;
+    @Column(name = "role_ids")
+    private String roleIds;
+    @Column(name = "locked")
+    private Boolean locked;
 
-    public Long getId() {
-        return id;
+
+
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -45,19 +39,27 @@ public class SysUser {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public String getEmail() {
-        return email;
+    public String getRoleIds() {
+        return roleIds;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 }

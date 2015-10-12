@@ -2,11 +2,13 @@ package com.wang.auth;
 
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SysUserService;
+import com.wang.util.PasswordHelper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,18 +44,18 @@ public class DbRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-        logger.info("authc pass:");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         logger.info("authc name:" + token.getUsername());
+        logger.info("authc password:" + new String(token.getPassword()));
         SysUser user  = sysUserService.getByName(token.getUsername());
         if (user != null) {
-
-            logger.info("authc name:" + token.getUsername() + " user:"
-                    + user.getName() + " pwd:" + user.getPassword()
-                    + "getname:" + getName());
-
-            return new SimpleAuthenticationInfo(user.getName(),
-                    user.getPassword(), getName());
+           if(!PasswordHelper.checkMd5Password(token.getUsername(),
+                                                new String(token.getPassword()),
+                                                user.getSalt(),user.getPassword())){
+               return null;
+           }
+            return new SimpleAuthenticationInfo(user.getUserName(),
+                     user.getPassword(),ByteSource.Util.bytes(user.getSalt()), user.getUserName());
         }
         return null;
     }

@@ -26,7 +26,7 @@
         <property name="unauthorizedUrl" value="/unAuthorization.jsp" />
         <property name="filterChainDefinitions">
             <value>
-                /logout.do = logout
+                /logout = logout
                 /admin/login =anon
                 /user/** = authc
                 /admin/** = authc,roles[admin]

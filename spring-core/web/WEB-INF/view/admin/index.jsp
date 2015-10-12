@@ -4,6 +4,6 @@
     <title></title>
   </head>
   <body>
- this is  ${sysUser.nickName}
+ this is  ${sysUser.userName}
   </body>
 </html>

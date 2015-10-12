@@ -1,6 +1,5 @@
 package com.wang;
 
-import com.wang.auth.sys.entity.SysUser;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
 
@@ -65,19 +64,7 @@ public class BaseDao1 {
      * 当然可以转换为其他类，如表的对象画形式。
      * @return
      */
-    public List<SysUser> getAllSysUser(){
-        String listSql = "select * from tb_user";
-        List<SysUser> results = jdbcTemplate.query(listSql, new RowMapper<SysUser>() {
-            public SysUser mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
-                SysUser sysUser = new SysUser();
-                sysUser.setId(resultSet.getLong("id"));
-                sysUser.setName(resultSet.getString("login_name"));
-                sysUser.setNickName(resultSet.getString("real_name"));
-                return sysUser;
-            }
-        });
-        return results;
-    }
+
 
 
     public void executeFunction(){

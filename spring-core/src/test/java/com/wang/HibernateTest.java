@@ -1,6 +1,9 @@
 package com.wang;
 
-import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.entity.SysResource;
+import com.wang.auth.sys.enumeration.SysResourceType;
+import com.wang.auth.sys.service.SysResourceService;
+import com.wang.auth.sys.service.SysRoleService;
 import com.wang.auth.sys.service.SysUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +41,26 @@ public class HibernateTest extends AbstractJUnit4SpringContextTests {
     }*/
     @Resource
     private SysUserService sysUserService;
+    @Resource
+    private SysRoleService sysRoleService;
+    @Resource
+    private SysResourceService sysResourceService;
     @Test
     public void run(){
-        SysUser user = sysUserService.getByName("wang");
-        System.out.println(user.getName());
+      // sysUserService.addUser("admin","admin123");
+     //   sysRoleService.addRole("超级管理员","admin","不能删除",true,"*");
 
+       /* SysResource sysResource = new SysResource();
+        sysResource.setAvailable(true);
+        sysResource.setName("用户管理");
+        sysResource.setOrderNum(1);
+        sysResource.setParentId(0L);
+        sysResource.setResourceCode("user");
+        sysResource.setType(SysResourceType.MENU);
+        sysResourceService.addResource(sysResource);*/
+
+        sysUserService.login("admin","admin123");
     }
+
+
 }

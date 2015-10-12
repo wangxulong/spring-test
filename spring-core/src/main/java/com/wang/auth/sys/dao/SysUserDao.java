@@ -2,7 +2,6 @@ package com.wang.auth.sys.dao;
 
 import com.wang.auth.sys.entity.SysUser;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysUserDao extends BaseDao<SysUser,Long> {
 
-    @Query("FROM SysUser s WHERE s.name=?1")
+    @Query("FROM SysUser s WHERE s.userName=?1")
     public SysUser getByUserName(String name);
+
+
 }
