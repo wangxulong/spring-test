@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * Created by wxl on 2015/10/1.
  */
 @Controller
-@RequestMapping("/admin/")
+@RequestMapping("/sys/user/")
 public class SysUserController {
    private Logger logger = LoggerFactory.getLogger(SysUserController.class);
     @Resource

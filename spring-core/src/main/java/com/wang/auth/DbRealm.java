@@ -3,6 +3,7 @@ package com.wang.auth;
 import com.google.common.base.Strings;
 import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SysUserService;
+import com.wang.auth.sys.util.CurrentThreadUtil;
 import com.wang.util.PasswordHelper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -10,6 +11,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.omg.CORBA.Current;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,13 +22,15 @@ import javax.annotation.Resource;
  */
 public class DbRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(DbRealm.class);
-
     @Resource
     private SysUserService sysUserService;
 
+    @Resource
+    private CurrentThreadUtil currentThreadUtil;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection p) {
-        SysUser user = (SysUser) p.fromRealm(getName()).iterator().next();
+        SysUser user = currentThreadUtil.getCurrentUser();
         if (user != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 //          for (Role role : user.getRoles()) {
@@ -46,11 +50,12 @@ public class DbRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        //String userName = token.getUsername();
         SysUser user  = sysUserService.getByName(token.getUsername());
         if (user != null) {
-            return new SimpleAuthenticationInfo(user.getUserName(),
-                     user.getPassword(),ByteSource.Util.bytes(user.getUserName()+user.getSalt()), user.getUserName());
+           SimpleAuthenticationInfo info= new SimpleAuthenticationInfo(user.getUserName(),
+                    user.getPassword(),ByteSource.Util.bytes(user.getUserName()+user.getSalt()), user.getUserName());
+            currentThreadUtil.setCurrentUser(user);
+            return info;
         }
         return null;
     }
