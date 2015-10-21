@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class CurrentThreadUtil {
     @Resource
     private  SysUserService sysUserService;
-    private static ThreadLocal<SysUser> currentUser=new ThreadLocal<SysUser>();
+    private final static ThreadLocal<SysUser> currentUser=new ThreadLocal<SysUser>();
 
     public SysUser getCurrentUser(){
         SysUser sysUser = currentUser.get();
@@ -30,6 +30,9 @@ public class CurrentThreadUtil {
     }
 
     public void setCurrentUser(SysUser sysUser){
+        if(null!=currentUser.get()){
+            currentUser.remove();
+        }
         currentUser.set(sysUser);
     }
 

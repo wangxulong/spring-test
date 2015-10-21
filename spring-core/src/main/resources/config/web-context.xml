@@ -10,7 +10,12 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <import resource="spring-context.xml"/>
     <!-- 开启注解 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <context:component-scan base-package="com.wang.controller" />
 
     <!-- 定义视图解析器 -->
@@ -18,4 +23,18 @@
         <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <mvc:default-servlet-handler/>
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/static/images/**" location="/static/images/" />
+    <mvc:resources mapping="/static/js/**" location="/static/js/"  />
+    <mvc:resources mapping="/static/css/**" location="/static/css/" />
+
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/sys/**"/>
+            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+            <bean class="com.wang.intercepter.UserInfoInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

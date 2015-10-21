@@ -54,7 +54,7 @@ public class DbRealm extends AuthorizingRealm {
         if (user != null) {
            SimpleAuthenticationInfo info= new SimpleAuthenticationInfo(user.getUserName(),
                     user.getPassword(),ByteSource.Util.bytes(user.getUserName()+user.getSalt()), user.getUserName());
-            currentThreadUtil.setCurrentUser(user);
+
             return info;
         }
         return null;

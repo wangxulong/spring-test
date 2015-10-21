@@ -31,10 +31,12 @@
         <property name="unauthorizedUrl" value="/unauthorized.jsp" />
         <property name="filterChainDefinitions">
             <value>
-                /logout = logout
+                /static/**  = anon
+                /admin/logout = logout
                 /admin/login =anon
                 /user/** = authc
-                /admin/** = authc,roles[admin]
+                /admin/** = authc
+                /sys/** = authc
             </value>
         </property>
     </bean>
