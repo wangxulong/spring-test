@@ -1,10 +1,8 @@
 package com.wang.auth;
 
-import com.google.common.base.Strings;
 import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SecurityService;
 import com.wang.auth.sys.service.SysUserService;
-import com.wang.auth.sys.util.CurrentThreadUtil;
-import com.wang.util.PasswordHelper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -24,13 +22,11 @@ public class DbRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(DbRealm.class);
     @Resource
     private SysUserService sysUserService;
-
     @Resource
-    private CurrentThreadUtil currentThreadUtil;
-
+    private SecurityService securityService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection p) {
-        SysUser user = currentThreadUtil.getCurrentUser();
+        SysUser user = securityService.getLoginUser();
         if (user != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 //          for (Role role : user.getRoles()) {

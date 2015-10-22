@@ -25,7 +25,16 @@ public class SysResource extends BaseEntity{
     private String resourceCode;
     @Column(name = "available")
     private Boolean available;
+    @Column(name = "icon")
+    private String icon;
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getName() {
         return name;

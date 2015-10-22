@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wxl on 2015/10/12.
@@ -27,5 +28,20 @@ public class SysRoleService {
         sysRoleDao.save(role);
 
     }
+    public void addRole(String roleName,String roleCode,String roleDesc,boolean available){
+        addRole(roleName, roleCode, roleDesc, available, null);
+    }
+    public List<SysRole> getAllRoles(){
+        return sysRoleDao.findAll();
+    }
+
+    public void deleteRole(Long... ids){
+        for(Long id:ids){
+            sysRoleDao.delete(id);
+        }
+    }
+
+
+
 
 }

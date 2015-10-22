@@ -137,12 +137,12 @@
       <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
   </div><!-- /.main-container -->
-
+<script src="${ctx}/static/js/ace/assets/js/bootstrap.js"></script>
 
   <!-- page specific plugin scripts -->
 
   <!-- ace scripts -->
-  <%--<script src="${ctx}/static/js/ace/assets/js/ace/elements.scroller.js"></script>
+   <script src="${ctx}/static/js/ace/assets/js/ace/elements.scroller.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/elements.colorpicker.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/elements.fileinput.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/elements.typeahead.js"></script>
@@ -163,23 +163,21 @@
   <script src="${ctx}/static/js/ace/assets/js/ace/ace.settings-skin.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/ace.widget-on-reload.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/ace.searchbox-autocomplete.js"></script>
---%>
+
   <!-- inline scripts related to this page -->
 
   <!-- the following scripts are used in demo only for onpage help and you don't need them -->
- <%-- <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/ace.onpage-help.css" />
+<%--  <link rel="stylesheet" href="${ctx}/static/js/ace/assets/css/ace.onpage-help.css" />
   <link rel="stylesheet" href="${ctx}/static/js/ace/docs/assets/js/themes/sunburst.css" />
---%>
-  <%--<script type="text/javascript"> ace.vars['base'] = '..'; </script>
+  <script type="text/javascript"> ace.vars['base'] = '..'; </script>
   <script src="${ctx}/static/js/ace/assets/js/ace/elements.onpage-help.js"></script>
   <script src="${ctx}/static/js/ace/assets/js/ace/ace.onpage-help.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/rainbow.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/generic.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/html.js"></script>
   <script src="${ctx}/static/js/ace/docs/assets/js/language/css.js"></script>
-  <script src="${ctx}/static/js/ace/docs/assets/js/language/javascript.js"></script>
---%>
-<div id="modal-form" class="modal" tabindex="-1">
+  <script src="${ctx}/static/js/ace/docs/assets/js/language/javascript.js"></script>--%>
+  <div id="modal-form" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
 

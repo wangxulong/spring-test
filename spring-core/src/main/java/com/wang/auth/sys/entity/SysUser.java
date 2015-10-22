@@ -1,6 +1,7 @@
 package com.wang.auth.sys.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by wxl on 2015/10/12.
@@ -20,8 +21,27 @@ public class SysUser extends BaseEntity{
     @Column(name = "locked")
     private Boolean locked;
 
+    @Transient
+    private List<String> userRoleNames;
+    @Transient
+    private List<SysRole> userRoles;
 
 
+    public List<SysRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<SysRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public List<String> getUserRoleNames() {
+        return userRoleNames;
+    }
+
+    public void setUserRoleNames(List<String> userRoleNames) {
+        this.userRoleNames = userRoleNames;
+    }
 
     public String getUserName() {
         return userName;

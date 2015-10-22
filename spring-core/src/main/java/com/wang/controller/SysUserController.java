@@ -1,11 +1,15 @@
 package com.wang.controller;
 
+import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SecurityService;
+import com.wang.auth.sys.service.SysRoleService;
 import com.wang.auth.sys.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,6 +25,11 @@ public class SysUserController {
    private Logger logger = LoggerFactory.getLogger(SysUserController.class);
     @Resource
     private SysUserService sysUserService;
+    @Resource
+    private SecurityService securityService;
+    @Resource
+    private SysRoleService sysRoleService;
+
     @RequestMapping("index")
     public void index(Model model){
         List<SysUser> sysUsers = sysUserService.getAllSysUser();
@@ -57,5 +66,20 @@ public class SysUserController {
         }
 
         return "admin/index";
+    }
+
+    @RequestMapping(value = "addRole",method = RequestMethod.POST)
+    public void addRole(Long id,Model model){
+        List<SysRole> sysRoles = sysRoleService.getAllRoles();
+        SysUser user = sysUserService.findById(id);
+        model.addAttribute("sysRoles",sysRoles);
+        model.addAttribute("user",user);
+        model.addAttribute("id",id);
+    }
+
+    @RequestMapping(value = "saveRole")
+    public String saveRole(Long id,String[] roleList){
+        sysUserService.addUserRole(id,roleList);
+        return "redirect:/sys/user/index";
     }
 }
