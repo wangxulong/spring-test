@@ -2,4 +2,5 @@
 <sitemesh>
     <mapping path="/sys/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/sys/**/add*" exclue="true"/>
+    <mapping path="/sys/**/ajax*" exclue="true"/>
 </sitemesh>

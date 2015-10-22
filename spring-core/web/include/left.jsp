@@ -53,7 +53,7 @@
             <b class="arrow"></b>
         </li>
 
-        <li class="">
+        <li class="active">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
@@ -80,6 +80,14 @@
                     <a href="${ctx}/sys/role/index">
                         <i class="menu-icon fa fa-caret-right"></i>
                         系统角色
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li class="active">
+                    <a href="${ctx}/sys/res/index">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        系统资源
                     </a>
 
                     <b class="arrow"></b>

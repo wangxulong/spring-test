@@ -28,6 +28,18 @@ public class SysResource extends BaseEntity{
     @Column(name = "icon")
     private String icon;
 
+    @Transient
+    @Column(name = "childCount")
+    private Long childCount;
+
+    public Long getChildCount() {
+        return childCount;
+    }
+
+    public void setChildCount(Long childCount) {
+        this.childCount = childCount;
+    }
+
     public String getIcon() {
         return icon;
     }

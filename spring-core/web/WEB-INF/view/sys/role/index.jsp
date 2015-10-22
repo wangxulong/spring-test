@@ -53,7 +53,7 @@
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </a>
 
-                    <button class="btn btn-xs btn-warning">
+                    <button class="btn btn-xs btn-warning addResource">
                         <i class="ace-icon fa fa-flag bigger-120"></i>
                     </button>
                 </div>
@@ -105,6 +105,11 @@
     $(function(){
         $(".addSysRole").on("click",function(){
             $("#modal-form .modal-content").load("${ctx}/sys/role/add",{},function(){
+                $("#modal-form").modal("show");
+            });
+        });
+        $(".addResource").on("click",function(){
+            $("#modal-form .modal-content").load("${ctx}/sys/role/addRes",{},function(){
                 $("#modal-form").modal("show");
             });
         });

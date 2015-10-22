@@ -42,4 +42,8 @@ public class SysRoleController {
         sysRoleService.deleteRole(id);
         return "redirect:/sys/role/index";
     }
+
+    @RequestMapping(value = "addRes")
+    public void addRes(){
+    }
 }
