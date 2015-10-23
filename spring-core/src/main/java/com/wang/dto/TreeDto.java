@@ -8,6 +8,16 @@ public class TreeDto {
     private String text;
     private boolean children;
     private String type;
+    private boolean checked;
+    private Long parentId;
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 
     public Long getId() {
         return id;
@@ -39,5 +49,13 @@ public class TreeDto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

@@ -44,59 +44,50 @@
     </div><!-- /.sidebar-shortcuts -->
 
     <ul class="nav nav-list">
-        <li class="">
-            <a href="${ctx}/sys/user/index">
-                <i class="menu-icon fa fa-tachometer"></i>
-                <span class="menu-text"> 首页面 </span>
-            </a>
 
-            <b class="arrow"></b>
-        </li>
 
-        <li class="active">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-desktop"></i>
+        <c:forEach items="${myMenus}" var="myMenu">
+            <c:choose>
+                <c:when  test="${empty myMenu.children}">
+                    <li class="">
+                        <a href="${ctx}${myMenu.parent.url}">
+                            <i class="menu-icon fa fa-tachometer"></i>
+                            <span class="menu-text"> ${myMenu.parent.name} </span>
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="active">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
-								系统管理
+                                    ${myMenu.parent.name}
 							</span>
 
-                <b class="arrow fa fa-angle-down"></b>
-            </a>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
 
-            <b class="arrow"></b>
+                        <b class="arrow"></b>
 
-            <ul class="submenu">
+                        <ul class="submenu">
+                            <c:forEach items="${myMenu.children}" var="child">
+                                <li class="">
+                                    <a href="${ctx}${child.url}">
+                                        <i class="menu-icon fa fa-caret-right"></i>
+                                        ${child.name}
+                                    </a>
 
+                                    <b class="arrow"></b>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                </c:otherwise>
+            </c:choose>
 
-                <li class="">
-                    <a href="${ctx}/sys/user/index">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                         系统用户
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-                <li class="">
-                    <a href="${ctx}/sys/role/index">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        系统角色
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-                <li class="active">
-                    <a href="${ctx}/sys/res/index">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        系统资源
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-
-
-
-            </ul>
-        </li>
+        </c:forEach>
 
 
     </ul><!-- /.nav-list -->

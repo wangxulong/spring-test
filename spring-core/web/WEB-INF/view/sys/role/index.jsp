@@ -41,21 +41,28 @@
                 <td> ${sysRole.roleDesc}</td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                    <button class="btn btn-xs btn-success addSysRole">
-                        <i class="ace-icon fa fa-plus bigger-120 "></i>
-                    </button>
+                        <shiro:hasPermission name="sysRole:add">
+                            <button class="btn btn-xs btn-success addSysRole">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                            </button>
+                        </shiro:hasPermission>
 
-                    <button class="btn btn-xs btn-info">
-                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                    </button>
+                        <shiro:hasPermission name="sysRole:edit">
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysRole:delete">
+                            <a class="btn btn-xs btn-danger" href="${ctx}/sys/role/delete?id=${sysRole.id}">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </a>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysRole:allotRes">
+                            <button class="btn btn-xs btn-warning addResource" data="${sysRole.id}">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
 
-                    <a class="btn btn-xs btn-danger" href="${ctx}/sys/role/delete?id=${sysRole.id}">
-                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </a>
-
-                    <button class="btn btn-xs btn-warning addResource">
-                        <i class="ace-icon fa fa-flag bigger-120"></i>
-                    </button>
                 </div>
 
                     <div class="hidden-md hidden-lg">
@@ -109,7 +116,8 @@
             });
         });
         $(".addResource").on("click",function(){
-            $("#modal-form .modal-content").load("${ctx}/sys/role/addRes",{},function(){
+            var id=$(this).attr("data");
+            $("#modal-form .modal-content").load("${ctx}/sys/role/addRes",{id:id},function(){
                 $("#modal-form").modal("show");
             });
         });

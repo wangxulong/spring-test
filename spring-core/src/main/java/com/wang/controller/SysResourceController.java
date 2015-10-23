@@ -60,8 +60,8 @@ public class SysResourceController {
 
     @RequestMapping("ajaxTree")
     @ResponseBody
-    public String ajaxTree(Long parentId){
-        List<TreeDto> treeData= sysResourceService.getTreeData(parentId);
+    public String ajaxTree(Long parentId,Long roleId){
+        List<TreeDto> treeData= sysResourceService.getRoleResTree(parentId,roleId);
         return JSON.toJSONString(treeData);
     }
 

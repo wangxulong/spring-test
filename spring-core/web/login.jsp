@@ -271,7 +271,7 @@
                         $(".errorInfo").text(data.message);
                         return;
                     }
-                    window.location.href="${ctx}/sys/user/index";
+                    window.location.href="${ctx}/admin/index";
                 },"JSON");
             }
 

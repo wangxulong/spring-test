@@ -89,7 +89,10 @@
 
 						if('icon-class' in value)
 							header.find('i').addClass(value['icon-class']);
-						
+						//@wxl
+						if("checked" in value && value["checked"]==true){
+							setTimeout(function(){header.trigger('click')}, 0);
+						}
 						if('additionalParameters' in value
 							&& 'item-selected' in value.additionalParameters 
 								&& value.additionalParameters['item-selected'] == true) {
@@ -100,7 +103,12 @@
 						$entity = self.$element.find('[data-template=treeitem]:eq(0)').clone().removeClass('hide').removeAttr('data-template');
 						$entity.find('.tree-item-name > .tree-label').html(value.text || value.name);
 						$entity.data(value);
-						
+
+						//@wxl
+						if("checked" in value && value["checked"]==true){
+							$entity.addClass ('tree-selected');
+							$entity.find('i').removeClass(self.options['unselected-icon']).addClass(self.options['selected-icon']);
+						}
 						//ACE
 						if('additionalParameters' in value
 							&& 'item-selected' in value.additionalParameters 

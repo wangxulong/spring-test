@@ -5,15 +5,23 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.sun.deploy.util.ArrayUtil;
+import com.wang.auth.DbRealm;
+import com.wang.auth.sys.dao.SysResourceDao;
 import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
+import com.wang.auth.sys.entity.SysResource;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.enumeration.SysResourceType;
+import com.wang.dto.ResourceDto;
+import com.wang.dto.TreeDto;
+import com.wang.util.CommonUtil;
 import com.wang.util.PasswordHelper;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.hibernate.annotations.SourceType;
 import org.springframework.stereotype.Service;
@@ -36,6 +44,7 @@ public class SysUserService {
     private SysUserDao sysUserDao;
     @Resource
     private SysRoleDao sysRoleDao;
+
 
     public SysUser getByName(String name){
         return  sysUserDao.getByUserName(name);
@@ -96,10 +105,25 @@ public class SysUserService {
             user.setRoleIds(StringUtils.join(roleIds,","));
         }
         sysUserDao.save(user);
+        //清除缓存
+        RealmSecurityManager securityManager =(RealmSecurityManager)SecurityUtils.getSecurityManager();
+        DbRealm dbRealm = (DbRealm) securityManager.getRealms().iterator().next();
+        dbRealm.getAuthorizationCache().clear();
     }
 
 
     public SysUser findById(Long id){
         return sysUserDao.findOne(id);
+    }
+
+
+
+    public List<SysRole> getMyRole(Long userId){
+        SysUser user= sysUserDao.findOne(userId);
+        if(!Strings.isNullOrEmpty(user.getRoleIds())){
+            List<Long> roleIds = CommonUtil.convertStringToLongArray(user.getRoleIds());
+            return sysRoleDao.findByIdIn(roleIds);
+        }
+        return null;
     }
 }

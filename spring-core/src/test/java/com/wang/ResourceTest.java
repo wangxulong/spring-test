@@ -23,10 +23,6 @@ public class ResourceTest {
     private SysResourceDao sysResourceDao;
     @Test
     public void  testFolder(){
-        List<TreeDto> resourceList = sysResourceService.getTreeData(0L);
-
-        for(TreeDto r:resourceList){
-            System.out.println(r.getText());
-        }
+        sysResourceService.getMyResTree(1l,1l);
     }
 }

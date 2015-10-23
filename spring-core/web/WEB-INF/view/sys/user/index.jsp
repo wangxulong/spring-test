@@ -45,21 +45,27 @@
                 </td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                    <button class="btn btn-xs btn-success addSysUser">
-                        <i class="ace-icon fa fa-plus bigger-120 "></i>
-                    </button>
+                        <shiro:hasPermission name="sysUser:add">
+                            <button class="btn btn-xs btn-success addSysUser">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                            </button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:edit">
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:delete">
+                            <a class="btn btn-xs btn-danger" href="${ctx}/sys/user/delete?id=${sysUser.id}">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </a>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:allotRole">
+                            <button class="btn btn-xs btn-warning addRole" data="${sysUser.id}">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
 
-                    <button class="btn btn-xs btn-info">
-                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                    </button>
-
-                    <a class="btn btn-xs btn-danger" href="${ctx}/sys/user/delete?id=${sysUser.id}">
-                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </a>
-
-                    <button class="btn btn-xs btn-warning addRole" data="${sysUser.id}">
-                        <i class="ace-icon fa fa-flag bigger-120"></i>
-                    </button>
                 </div>
 
                     <div class="hidden-md hidden-lg">

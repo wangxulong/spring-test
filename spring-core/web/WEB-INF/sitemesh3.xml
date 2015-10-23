@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
     <mapping path="/sys/*" decorator="/decorators/admin.jsp"/>
+    <mapping path="/admin/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/sys/**/add*" exclue="true"/>
     <mapping path="/sys/**/ajax*" exclue="true"/>
 </sitemesh>
