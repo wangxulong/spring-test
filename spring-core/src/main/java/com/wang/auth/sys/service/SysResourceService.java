@@ -3,7 +3,6 @@ package com.wang.auth.sys.service;
 import com.google.common.base.Strings;
 import com.wang.auth.sys.dao.SysResourceDao;
 import com.wang.auth.sys.dao.SysRoleDao;
-import com.wang.auth.sys.dao.SysUserDao;
 import com.wang.auth.sys.entity.SysResource;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
@@ -11,12 +10,14 @@ import com.wang.auth.sys.enumeration.SysResourceType;
 import com.wang.dto.ResourceDto;
 import com.wang.dto.TreeDto;
 import com.wang.util.CommonUtil;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ import java.util.List;
 @Service
 @Transactional
 public class SysResourceService {
+	Logger log=Logger.getLogger(SysResourceService.class);
     @Resource
     private SysResourceDao sysResourceDao;
     @Resource
@@ -108,9 +110,15 @@ public class SysResourceService {
         return results;
     }
 
-
+    /**
+     * 
+     * @param parentId 父类id
+     * @param userId用户id
+     * @return
+     */
     public List<TreeDto> getMyResTree(Long parentId,Long userId){
-        //1.获取用户角色2.获取角色中的资源
+		//1.获取用户角色2.获取角色中的资源
+    	log.info("父类："+parentId+",用户："+userId+"得到子类节点开始");
         List<SysRole> myRoles = sysUserService.getMyRole(userId);
         List<TreeDto> results = getTreeData(parentId);
         if(null!=myRoles){
@@ -127,13 +135,11 @@ public class SysResourceService {
                             result.setChecked(true);
                         }
                     }
-
-
                 }
             }
 
         }
-
+        log.info("父类："+parentId+",用户："+userId+"得到子类节点结束");
         return results;
     }
 
@@ -191,5 +197,16 @@ public class SysResourceService {
             }
         }
         return resourceDtos;
+    }
+    /**
+     * 
+     * @Title: iocSysUserService
+     * @Description:互相注入
+     * @author:sunwei
+     * @createTime:2015年10月26日下午1:05:25
+     */
+    public void iocSysUserService(){
+    	System.out.println("我要注入："+sysUserService);
+    	sysUserService.addUser("孙伟", "admin");
     }
 }

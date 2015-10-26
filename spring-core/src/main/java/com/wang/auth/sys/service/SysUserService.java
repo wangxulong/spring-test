@@ -1,37 +1,28 @@
 package com.wang.auth.sys.service;
 
-import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.sun.deploy.util.ArrayUtil;
 import com.wang.auth.DbRealm;
-import com.wang.auth.sys.dao.SysResourceDao;
 import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
-import com.wang.auth.sys.entity.SysResource;
 import com.wang.auth.sys.entity.SysRole;
 import com.wang.auth.sys.entity.SysUser;
-import com.wang.auth.sys.enumeration.SysResourceType;
-import com.wang.dto.ResourceDto;
-import com.wang.dto.TreeDto;
 import com.wang.util.CommonUtil;
 import com.wang.util.PasswordHelper;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.Subject;
-import org.hibernate.annotations.SourceType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by wxl on 2015/10/1.
@@ -44,7 +35,8 @@ public class SysUserService {
     private SysUserDao sysUserDao;
     @Resource
     private SysRoleDao sysRoleDao;
-
+    @Resource
+    private SysResourceService sysResourceService; 
 
     public SysUser getByName(String name){
         return  sysUserDao.getByUserName(name);
@@ -120,10 +112,21 @@ public class SysUserService {
 
     public List<SysRole> getMyRole(Long userId){
         SysUser user= sysUserDao.findOne(userId);
-        if(!Strings.isNullOrEmpty(user.getRoleIds())){
+        if(null!=user){
             List<Long> roleIds = CommonUtil.convertStringToLongArray(user.getRoleIds());
             return sysRoleDao.findByIdIn(roleIds);
         }
         return null;
+    }
+    
+    /**
+     * 
+     * @Title: iocSysUserService
+     * @Description:互相注入
+     * @author:sunwei
+     * @createTime:2015年10月26日下午1:05:25
+     */
+    public void iocSysUserService(){
+    	System.out.println("我要注入："+sysResourceService);
     }
 }
