@@ -17,6 +17,7 @@
         </th>
         <th>用户名</th>
         <th>密码</th>
+        <th>用户角色</th>
         <th class="hidden-480">状态</th>
 
 
@@ -37,23 +38,34 @@
                     ${sysUser.userName}
                 </td>
                 <td> ${sysUser.password}</td>
+                <td>
+                    <c:forEach items="${sysUser.userRoleNames}" var="userRoleName">
+                        <span class="label label-sm label-success">${userRoleName}</span>
+                    </c:forEach>
+                </td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
-                    <button class="btn btn-xs btn-success addSysUser">
-                        <i class="ace-icon fa fa-plus bigger-120 "></i>
-                    </button>
+                        <shiro:hasPermission name="sysUser:add">
+                            <button class="btn btn-xs btn-success addSysUser">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                            </button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:edit">
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:delete">
+                            <a class="btn btn-xs btn-danger" href="${ctx}/sys/user/delete?id=${sysUser.id}">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </a>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysUser:allotRole">
+                            <button class="btn btn-xs btn-warning addRole" data="${sysUser.id}">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </shiro:hasPermission>
 
-                    <button class="btn btn-xs btn-info">
-                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                    </button>
-
-                    <a class="btn btn-xs btn-danger" href="${ctx}/sys/user/delete?id=${sysUser.id}">
-                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </a>
-
-                    <button class="btn btn-xs btn-warning">
-                        <i class="ace-icon fa fa-flag bigger-120"></i>
-                    </button>
                 </div>
 
                     <div class="hidden-md hidden-lg">
@@ -106,6 +118,13 @@
                 $("#modal-form").modal("show");
             });
         });
+        $(".addRole").on("click",function(){
+            var userId = $(this).attr("data");
+            $("#modal-form .modal-content").load("${ctx}/sys/user/addRole",{id:userId},function(){
+                $("#modal-form").modal("show");
+            });
+        });
+
     });
 </script>
 </body>

@@ -25,7 +25,32 @@ public class SysResource extends BaseEntity{
     private String resourceCode;
     @Column(name = "available")
     private Boolean available;
+    @Column(name = "icon")
+    private String icon;
+    @Column(name = "url")
+    private String url;
+    @Column(name = "script")
+    private String script;
 
+    @Transient
+    @Column(name = "childCount")
+    private Long childCount;
+
+    public Long getChildCount() {
+        return childCount;
+    }
+
+    public void setChildCount(Long childCount) {
+        this.childCount = childCount;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getName() {
         return name;
@@ -81,5 +106,21 @@ public class SysResource extends BaseEntity{
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
     }
 }

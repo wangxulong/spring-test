@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         ">
 
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" lazy-init="true">
         <!--单个realm使用realm,如果有多个realm，使用realms属性代替-->
         <property name="realm" ref="shiroRealm" />
         <property name="cacheManager" ref="shiroEhcacheManager" />

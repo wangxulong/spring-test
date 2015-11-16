@@ -181,6 +181,12 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
         <!--缓存工具类-->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
@@ -204,8 +210,17 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.4.3</version>
         </dependency>
-
-
+        <!--josn-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20150729</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.7</version>
+        </dependency>
         <!--日志-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -227,6 +242,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>javax.servlet-api</artifactId>
+	<version>3.0.1</version>
+</dependency>
 
     </dependencies>
 

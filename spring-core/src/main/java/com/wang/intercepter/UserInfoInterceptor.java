@@ -1,5 +1,9 @@
 package com.wang.intercepter;
 
+import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SecurityService;
+import com.wang.auth.sys.service.SysResourceService;
+import com.wang.auth.sys.service.SysUserService;
 import com.wang.auth.sys.util.CurrentThreadUtil;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -13,11 +17,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserInfoInterceptor extends HandlerInterceptorAdapter {
     @Resource
-    private CurrentThreadUtil currentThreadUtil;
+    private SysUserService sysUserService;
+    @Resource
+    private SysResourceService sysResourceService;
 
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        modelAndView.addObject("loginUser",currentThreadUtil.getCurrentUser());
-        System.out.println("当前登录用户："+currentThreadUtil.getCurrentUser().getUserName());
+        SysUser user = sysUserService.getCurrentUser();
+        if(null!=modelAndView){
+            modelAndView.addObject("loginUser",user);
+            modelAndView.addObject("myMenus",sysResourceService.getMyMenus());
+        }
+
+
     }
 
 }

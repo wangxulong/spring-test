@@ -31,10 +31,6 @@
 
 
     <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/sys/**"/>
-            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
-            <bean class="com.wang.intercepter.UserInfoInterceptor"/>
-        </mvc:interceptor>
+        <bean class="com.wang.intercepter.UserInfoInterceptor"/>
     </mvc:interceptors>
 </beans>

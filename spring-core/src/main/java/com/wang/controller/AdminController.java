@@ -36,4 +36,8 @@ public class AdminController {
     public String logout(){
         return null;
     }
+
+    @RequestMapping("index")
+    public void index(){
+    }
 }
