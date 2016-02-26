@@ -59,14 +59,29 @@ public class SysResourceService {
     }
 
     public void addSysRes(SysResource resource){
+        resource.setAvailable(true);
         //设置parentIds
         SysResource parent = sysResourceDao.findOne(resource.getParentId());
-        resource.setParentIds(parent.getParentIds()+"-"+parent.getId());
-        if(parent.getResourceCode().equals("0")){
-            resource.setParentIds("1");
+        //folder
+        if(null == parent&&resource.getType().equals(SysResourceType.FOLDER)){
+            resource.setParentIds("0");
+            sysResourceDao.save(resource);
+            return;
+        }
+        if(resource.getType().equals(SysResourceType.MENU)){
+            resource.setUrl(resource.getResourceCode());
+            resource.setParentIds(parent.getId()+"");
+            resource.setResourceCode(null);
+        }else{
+            resource.setParentIds(parent.getParentIds()+"-"+parent.getId());
         }
 
-        resource.setAvailable(true);
+//        if(parent.getResourceCode().equals("0")){
+//            resource.setParentIds("1");
+//        }
+
+
+
         sysResourceDao.save(resource);
     }
 
@@ -88,6 +103,7 @@ public class SysResourceService {
             tree.setText(root.getName());
             tree.setChildren(true);
             tree.setType("folder");
+            tree.setParentIds(root.getParentIds());
             if(children.isEmpty()){
                 tree.setChildren(false);
                 tree.setType("item");
@@ -113,7 +129,6 @@ public class SysResourceService {
     /**
      * 
      * @param parentId 父类id
-     * @param userId用户id
      * @return
      */
     public List<TreeDto> getMyResTree(Long parentId,Long userId){

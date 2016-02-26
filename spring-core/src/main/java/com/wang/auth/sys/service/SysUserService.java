@@ -35,8 +35,7 @@ public class SysUserService {
     private SysUserDao sysUserDao;
     @Resource
     private SysRoleDao sysRoleDao;
-    @Resource
-    private SysResourceService sysResourceService; 
+
 
     public SysUser getByName(String name){
         return  sysUserDao.getByUserName(name);
@@ -119,14 +118,5 @@ public class SysUserService {
         return null;
     }
     
-    /**
-     * 
-     * @Title: iocSysUserService
-     * @Description:互相注入
-     * @author:sunwei
-     * @createTime:2015年10月26日下午1:05:25
-     */
-    public void iocSysUserService(){
-    	System.out.println("我要注入："+sysResourceService);
-    }
+
 }

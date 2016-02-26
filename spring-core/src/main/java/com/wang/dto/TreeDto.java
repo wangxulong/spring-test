@@ -10,6 +10,15 @@ public class TreeDto {
     private String type;
     private boolean checked;
     private Long parentId;
+    private String parentIds;
+
+    public String getParentIds() {
+        return parentIds;
+    }
+
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds;
+    }
 
     public Long getParentId() {
         return parentId;

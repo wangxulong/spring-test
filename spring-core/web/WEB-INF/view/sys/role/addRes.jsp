@@ -50,8 +50,8 @@
          parent_id = 0;//load first level data
        }
        else if('type' in options && options['type'] == 'folder') {//it has children
-         /*if('additionalParameters' in options && 'children' in options.additionalParameters)
-           parent_id = options.additionalParameters['id']*/
+//         if('additionalParameters' in options && 'children' in options.additionalParameters)
+//           parent_id = options.additionalParameters['id']
          parent_id=options.id;
        }
 
@@ -62,7 +62,6 @@
            type: 'POST',
            dataType: 'json',
            success : function(data) {
-             console.info(data);
                callback({ data: data })
            },
            error: function(response) {
@@ -86,17 +85,29 @@
      });
      //show selected items inside a modal
      $('.btnSave').on('click', function() {
-       var output = [1];//根节点
+       var output = [];//根节点
        var items = $('#treeview').tree('selectedItems');
+       console.info(items);
        for(var i in items) if (items.hasOwnProperty(i)) {
          var item = items[i];
-         //添加父节点
 
-         if(-1==$.inArray(item.parentId,output)){
-            output.push(item.parentId);
-         }
+
         //添加选中节点
          if(-1==$.inArray(item.id,output)){
+             //添加父节点
+             var itemParentId = item.parentIds;
+             if(itemParentId&&itemParentId!= 0){
+               var itemParentIds = itemParentId.split("-");
+                 $.each(itemParentIds,function(index,value){
+                     if(-1==$.inArray(value,output)){
+                         output.push(value);
+                     }
+                 });
+             }
+//             //添加父节点
+//             if(-1==$.inArray(item.parentId,output)){
+//                 output.push(item.parentId);
+//             }
            output.push(item.id);
          }
          //output += item.additionalParameters['id'] + ":"+ item.text+"\n";

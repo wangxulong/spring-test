@@ -3,6 +3,8 @@ import com.wang.auth.sys.dao.SysResourceDao;
 import com.wang.auth.sys.entity.SysResource;
 import com.wang.auth.sys.service.SysResourceService;
 import com.wang.dto.TreeDto;
+import com.wang.entity.TbRequire;
+import com.wang.service.RequireService;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,8 +23,11 @@ public class ResourceTest {
     private SysResourceService sysResourceService;
     @Resource
     private SysResourceDao sysResourceDao;
+    @Resource
+    private RequireService requireService;
     @Test
     public void  testFolder(){
-        sysResourceService.getMyResTree(1l,1l);
+       List<TbRequire> dd= requireService.getAllQuestion();
+        System.out.println(dd.size());
     }
 }

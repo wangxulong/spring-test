@@ -13,14 +13,7 @@
             <h4 class="widget-title smaller">菜单管理</h4>
 
             <div class="widget-toolbar">
-                <label>
-                    <small class="green">
-                        <b>Horizontal</b>
-                    </small>
-
-                    <input id="id-check-horizontal" type="checkbox" class="ace ace-switch ace-switch-6">
-                    <span class="lbl middle"></span>
-                </label>
+                <a class="btn btn-primary" href="javascript:void(0);" id="addParentMenu" role="button">添加菜单</a>
             </div>
         </div>
 
@@ -106,6 +99,14 @@
             var id = $(this).attr("data");
             window.location.href="${ctx}/sys/res/delete?id="+id;
         });
+
+        $("#addParentMenu").on("click",function(e){
+            e.preventDefault();
+            $("#modal-form .modal-content").load("${ctx}/sys/res/add",{type:"folder",parentId:0},function(){
+                $("#modal-form").modal("show");
+            });
+        });
+
 
     });
 </script>
