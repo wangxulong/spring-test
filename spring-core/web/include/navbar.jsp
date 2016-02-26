@@ -30,7 +30,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                   权限管理
+                    SHU-微服务后端管理
                 </small>
             </a>
 

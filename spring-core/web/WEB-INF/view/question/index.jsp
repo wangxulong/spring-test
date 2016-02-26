@@ -16,6 +16,11 @@
             </label>
         </th>
         <th>标题</th>
+        <th>内容</th>
+        <th>创建人</th>
+        <th>创建时间</th>
+        <th>热点</th>
+        <th>操作</th>
     </tr>
     </thead>
 
@@ -32,8 +37,80 @@
                 <td>
                     ${question.title}
                 </td>
+                <td>
+                    ${question.description}
+                </td>
+                <td>
+                    ${question.userName}
+                </td>
+                <td>
+                    ${question.createTime}
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${question.status eq 3}">
+                            <span class="text-danger">是</span>
+                        </c:when>
+                        <c:otherwise>不是</c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="hidden-480">
+                    <div class="hidden-sm hidden-xs btn-group">
+                        <%--<shiro:hasPermission name="s:add">--%>
+                            <%--<button class="btn btn-xs btn-success addSysRole">--%>
+                                <%--<i class="ace-icon fa fa-plus bigger-120 "></i>--%>
+                            <%--</button>--%>
+                        <%--</shiro:hasPermission>--%>
+                            <button class="btn btn-xs btn-success addQuestion">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                            </button>
+                            <button class="btn btn-xs btn-info editQuestion"   data="${question.id}">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+                            <a class="btn btn-xs btn-danger delete"  data="${question.id}">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </a>
+                            <button class="btn btn-xs btn-warning upToHot" data="${question.id}">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
 
-         </tr>
+                    </div>
+
+                    <div class="hidden-md hidden-lg">
+                        <div class="inline position-relative">
+                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                <li>
+                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                                <span class="blue">
+                                                                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                                <span class="green">
+                                                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                                <span class="red">
+                                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </c:forEach>
 
 
@@ -44,17 +121,30 @@
 </table>
 <script>
     $(function(){
-        $(".addSysUser").on("click",function(){
-            $("#modal-form .modal-content").load("${ctx}/sys/user/add",{},function(){
+        $(".addQuestion").on("click",function(){
+            $("#modal-form .modal-content").load("${ctx}/question/add",{},function(){
                 $("#modal-form").modal("show");
             });
         });
-        $(".addRole").on("click",function(){
-            var userId = $(this).attr("data");
-            $("#modal-form .modal-content").load("${ctx}/sys/user/addRole",{id:userId},function(){
+        $(".editQuestion").on("click",function(){
+            var id = $(this).attr("data");
+            $("#modal-form .modal-content").load("${ctx}/question/add",{id:id},function(){
                 $("#modal-form").modal("show");
             });
         });
+        $(".delete").on("click",function(){
+                var r = confirm("确定要删除吗");
+            if(r){
+                 var id = $(this).attr("data");
+                 window.location.href="${ctx}/question/delete?id="+id;
+            }
+
+        });
+        $(".upToHot").on("click",function(){
+            var id = $(this).attr("data");
+            window.location.href="${ctx}/question/hot?id="+id;
+        });
+
 
     });
 </script>

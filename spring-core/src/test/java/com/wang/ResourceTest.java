@@ -2,6 +2,7 @@ package com.wang;
 import com.wang.auth.sys.dao.SysResourceDao;
 import com.wang.auth.sys.entity.SysResource;
 import com.wang.auth.sys.service.SysResourceService;
+import com.wang.dto.QuestionDto;
 import com.wang.dto.TreeDto;
 import com.wang.entity.TbRequire;
 import com.wang.service.RequireService;
@@ -27,7 +28,6 @@ public class ResourceTest {
     private RequireService requireService;
     @Test
     public void  testFolder(){
-       List<TbRequire> dd= requireService.getAllQuestion();
-        System.out.println(dd.size());
+       //List<QuestionDto> dd= requireService.getAllQuestion();
     }
 }

@@ -34,6 +34,7 @@
                 /static/**  = anon
                 /admin/logout = logout
                 /admin/login =anon
+                /ajax/** =anon
                 /user/** = authc
                 /admin/** = authc
                 /sys/** = authc
