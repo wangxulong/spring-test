@@ -102,4 +102,20 @@ public class RequireService {
         return rows;
     }
 
+    //通过ID获取问答信息
+    public QuestionDto getQuestionById(Long id) {
+        EntityManager entityManager = managerFactory.createEntityManager();
+        String sql = "SELECT  r.id as id, r.user_id as userId,r.title,r.description,r.good,r.bad,r.type,r.create_time as createTime," +
+                "r.begin_time as beginTime,r.end_time as endTime,r.category_id as categoryId,r.tag_id as tagId,r.status " +
+                ",u.user_name as userName from tb_require r LEFT JOIN sys_user u on u.id = r.user_id where r.id="+id+ " " +
+                " and r.status <>"+ConstantUtil.delete_status ;
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(QuestionDto.class));
+
+        List rows = query.getResultList();
+
+        entityManager.close();
+        if(!rows.isEmpty()) return (QuestionDto) rows.get(0);
+        return null;
+    }
 }

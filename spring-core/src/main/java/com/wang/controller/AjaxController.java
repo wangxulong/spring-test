@@ -19,11 +19,18 @@ import java.util.List;
 public class AjaxController {
     @Resource
     private RequireService requireService;
-
+    //获取热点问答
     @RequestMapping("hotQuestion")
     @ResponseBody
     public ResultMessage getAjaxHot(){
         List<QuestionDto> hots = requireService.getHotQuestion();
         return new ResultMessage(ResultMessage.SUCCESS,"请求成功",hots);
+    }
+    //通过ID获取问答
+    @RequestMapping("question")
+    @ResponseBody
+    public ResultMessage getQuestionById(Long id){
+        QuestionDto questionDto = requireService.getQuestionById(id);
+        return new ResultMessage(ResultMessage.SUCCESS,"请求成功",questionDto);
     }
 }
