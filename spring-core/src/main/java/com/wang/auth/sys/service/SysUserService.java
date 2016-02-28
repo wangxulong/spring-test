@@ -2,6 +2,7 @@ package com.wang.auth.sys.service;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.wang.auth.DbRealm;
 import com.wang.auth.sys.dao.SysRoleDao;
 import com.wang.auth.sys.dao.SysUserDao;
@@ -119,4 +120,15 @@ public class SysUserService {
     }
     
 
+    public SysUser getUserByNameAndPass(String name,String password){
+        SysUser sysUser = getByName(name);
+        Boolean isLoginUser = false;
+        try{
+           isLoginUser = PasswordHelper.checkMd5Password(name, password, sysUser.getSalt(), sysUser.getPassword());
+        }catch (Exception e){
+            return null;
+        }
+        if(isLoginUser) return sysUser;
+        return null;
+    }
 }

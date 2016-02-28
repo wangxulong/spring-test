@@ -13,5 +13,7 @@ public interface SysUserDao extends BaseDao<SysUser,Long> {
     @Query("FROM SysUser s WHERE s.userName=?1")
     public SysUser getByUserName(String name);
 
+    @Query("FROM SysUser s WHERE s.userName=?1 and s.password=?2")
+    public SysUser getByUserNameAndPassword(String name,String password);
 
 }

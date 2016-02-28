@@ -1,11 +1,14 @@
 package com.wang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.wang.auth.sys.entity.SysUser;
+import com.wang.auth.sys.service.SysUserService;
 import com.wang.dto.CommentDto;
 import com.wang.dto.QuestionDto;
 import com.wang.dto.ResultMessage;
 import com.wang.service.CommentService;
 import com.wang.service.RequireService;
+import com.wang.util.PasswordHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +26,18 @@ public class AjaxController {
     private RequireService requireService;
     @Resource
     private CommentService commentService;
+    @Resource
+    private SysUserService sysUserService;
+
+    //获取热点问答
+    @RequestMapping("login")
+    @ResponseBody
+    public ResultMessage login(String name,String password){
+       SysUser sysUser= sysUserService.getUserByNameAndPass(name, password);
+        if(null == sysUser) return new ResultMessage(ResultMessage.ERROR,"登陆失败");
+        return new ResultMessage(ResultMessage.SUCCESS,"success",sysUser);
+    }
+
     //获取热点问答
     @RequestMapping("hotQuestion")
     @ResponseBody
