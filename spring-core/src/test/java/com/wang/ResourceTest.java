@@ -28,6 +28,6 @@ public class ResourceTest {
     private RequireService requireService;
     @Test
     public void  testFolder(){
-       //List<QuestionDto> dd= requireService.getAllQuestion();
+      requireService.getQuestionById(2L);
     }
 }

@@ -1,8 +1,10 @@
 package com.wang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.wang.dto.CommentDto;
 import com.wang.dto.QuestionDto;
 import com.wang.dto.ResultMessage;
+import com.wang.service.CommentService;
 import com.wang.service.RequireService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import java.util.List;
 public class AjaxController {
     @Resource
     private RequireService requireService;
+    @Resource
+    private CommentService commentService;
     //获取热点问答
     @RequestMapping("hotQuestion")
     @ResponseBody
@@ -33,4 +37,13 @@ public class AjaxController {
         QuestionDto questionDto = requireService.getQuestionById(id);
         return new ResultMessage(ResultMessage.SUCCESS,"请求成功",questionDto);
     }
+
+    //获取问答上的回复
+    @RequestMapping("question/comment")
+    @ResponseBody
+    public ResultMessage getQuestionComments(Long id){
+        List<CommentDto> comments = commentService.getAllQuestionComment(id);
+        return new ResultMessage(ResultMessage.SUCCESS,"请求成功",comments);
+    }
+
 }

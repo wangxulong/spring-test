@@ -118,4 +118,12 @@ public class RequireService {
         if(!rows.isEmpty()) return (QuestionDto) rows.get(0);
         return null;
     }
+
+    public void backToNormal(Long id) {
+        TbRequire require = requireDao.findOne(id);
+        if(null!=require) {
+            require.setStatus(ConstantUtil.normal_status);
+            requireDao.save(require);
+        }
+    }
 }

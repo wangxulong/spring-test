@@ -6,9 +6,11 @@
     <title></title>
 </head>
 <body>
-<button class="btn btn-success addQuestion">
-    添加
-</button>
+<p class="bg-info"> 当前问答为：${question.title}
+<a class="btn btn-primary" href="${ctx}/question/index"> 返回</a>
+<a class="btn btn-success addComment" > 添加</a>
+</p>
+
 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -18,18 +20,16 @@
                 <span class="lbl"></span>
             </label>
         </th>
-        <th>标题</th>
-        <th>内容</th>
-        <th>创建人</th>
-        <th>创建时间</th>
-        <th>热点</th>
+        <th>评论内容</th>
+        <th>评论人</th>
+        <th>评论时间</th>
         <th>操作</th>
     </tr>
     </thead>
 
     <tbody>
 
-        <c:forEach items="${questions}" var="question">
+        <c:forEach items="${comments}" var="comment">
             <tr>
                 <td class="center">
                     <label class="position-relative">
@@ -38,24 +38,14 @@
                     </label>
                 </td>
                 <td>
-                    ${question.title}
+                    ${comment.content}
                 </td>
                 <td>
-                    ${question.description}
+                    ${comment.userName}
                 </td>
+
                 <td>
-                    ${question.userName}
-                </td>
-                <td>
-                    ${question.createTime}
-                </td>
-                <td>
-                    <c:choose>
-                        <c:when test="${question.status eq 3}">
-                            <span class="text-danger">是</span>
-                        </c:when>
-                        <c:otherwise>不是</c:otherwise>
-                    </c:choose>
+                    ${comment.createTime}
                 </td>
                 <td class="hidden-480">
                     <div class="hidden-sm hidden-xs btn-group">
@@ -64,24 +54,18 @@
                                 <%--<i class="ace-icon fa fa-plus bigger-120 "></i>--%>
                             <%--</button>--%>
                         <%--</shiro:hasPermission>--%>
-                            <button class="btn btn-xs btn-success addQuestion">
+                            <button class="btn btn-xs btn-success addComment">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                             </button>
-                            <button class="btn btn-xs btn-info editQuestion"   data="${question.id}">
+                            <button class="btn btn-xs btn-info editComment"   data="${comment.id}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </button>
-                            <a class="btn btn-xs btn-danger delete"  data="${question.id}">
+                            <a class="btn btn-xs btn-danger delete"  data="${comment.id}">
                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                             </a>
-                            <button class="btn btn-xs btn-warning upToHot" data="${question.id}">
-                                <i class="ace-icon glyphicon glyphicon-hand-up bigger-120"></i>
+                            <button class="btn btn-xs btn-warning upToHot" data="${comment.id}" >
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
                             </button>
-                            <button class="btn btn-xs btn-warning backToNormal" data="${question.id}">
-                                <i class="ace-icon glyphicon glyphicon-hand-down"></i>
-                            </button>
-                            <a class="btn btn-xs btn-danger "  href="${ctx}/comment/question/index?contentId=${question.id}">
-                                <i class="ace-icon glyphicon glyphicon-comment bigger-120"></i>
-                            </a>
 
                     </div>
 
@@ -130,14 +114,16 @@
 </table>
 <script>
     $(function(){
-        $(".addQuestion").on("click",function(){
-            $("#modal-form .modal-content").load("${ctx}/question/add",{},function(){
+        $(".addComment").on("click",function(){
+            var contentId = "${question.id}";
+            var contentType = "${question.type}";
+            $("#modal-form .modal-content").load("${ctx}/comment/question/add",{contentId:contentId,contentType:contentType},function(){
                 $("#modal-form").modal("show");
             });
         });
-        $(".editQuestion").on("click",function(){
+        $(".editComment").on("click",function(){
             var id = $(this).attr("data");
-            $("#modal-form .modal-content").load("${ctx}/question/add",{id:id},function(){
+            $("#modal-form .modal-content").load("${ctx}/comment/question/add",{id:id},function(){
                 $("#modal-form").modal("show");
             });
         });
@@ -145,18 +131,12 @@
                 var r = confirm("确定要删除吗");
             if(r){
                  var id = $(this).attr("data");
-                 window.location.href="${ctx}/question/delete?id="+id;
+                 window.location.href="${ctx}/comment/question/delete?id="+id;
             }
 
         });
-        $(".upToHot").on("click",function(){
-            var id = $(this).attr("data");
-            window.location.href="${ctx}/question/hot?id="+id;
-        });
-        $(".backToNormal").on("click",function(){
-            var id = $(this).attr("data");
-            window.location.href="${ctx}/question/back?id="+id;
-        });
+
+
 
     });
 </script>

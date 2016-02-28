@@ -41,7 +41,7 @@ public class TbComment implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id" )
 	public Long getId() {
 		return this.id;
 	}

@@ -2,9 +2,12 @@
 <sitemesh>
     <mapping path="/sys/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/question/*" decorator="/decorators/admin.jsp"/>
+    <mapping path="/comment/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/admin/*" decorator="/decorators/admin.jsp"/>
     <mapping path="/sys/**/add*" exclue="true"/>
     <mapping path="/sys/**/ajax*" exclue="true"/>
     <mapping path="/question/add*" exclue="true"/>
+    <mapping path="/comment/*/add*" exclue="true"/>
     <mapping path="/question/ajax*" exclue="true"/>
+    <mapping path="/comment/*/ajax*" exclue="true"/>
 </sitemesh>

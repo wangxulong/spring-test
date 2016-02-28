@@ -56,6 +56,12 @@ public class QuestionController {
         requireService.upToHot(id);
         return "redirect:/question/index";
     }
+
+    @RequestMapping(value = "back")
+    public String setNormal(Long id){
+        requireService.backToNormal(id);
+        return "redirect:/question/index";
+    }
     @RequestMapping("ajaxHot")
     @ResponseBody
     public String getAjaxHot(){
@@ -63,4 +69,5 @@ public class QuestionController {
         String result = JSON.toJSONString(new ResultMessage(ResultMessage.SUCCESS,"请求成功",hots));
         return result ;
     }
+
 }
