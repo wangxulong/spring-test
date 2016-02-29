@@ -58,7 +58,8 @@ public class CommentService {
         EntityManager entityManager = managerFactory.createEntityManager();
         String sql = "select a.id as id,a.content,b.user_name as userName,a.degree,a.create_time as createTime" +
                 " from tb_comment a LEFT JOIN sys_user b on a.user_id=b.id LEFT JOIN " +
-                "tb_require c on c.id = a.content_id where a.content_type="+ConstantUtil.questionType+" and c.id="+contentId;
+                "tb_require c on c.id = a.content_id where a.content_type="+ConstantUtil.questionType+" and c.id="+contentId+"" +
+                " ORDER BY a.create_time DESC ";
         Query query = entityManager.createNativeQuery(sql);
         query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(CommentDto.class));
         List rows = query.getResultList();

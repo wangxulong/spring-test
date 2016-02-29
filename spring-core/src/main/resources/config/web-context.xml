@@ -13,7 +13,21 @@
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <!-- 处理responseBody 里面日期类型 -->
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+                            </bean>
+                        </property>
+                        <!-- 时区指定 -->
+                        <property name="timeZone" value="GMT+8" />
+                    </bean>
+                </property>
+            </bean>
+
         </mvc:message-converters>
     </mvc:annotation-driven>
     <context:component-scan base-package="com.wang.controller" />
