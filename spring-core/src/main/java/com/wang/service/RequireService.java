@@ -31,8 +31,6 @@ public class RequireService {
     private SecurityService securityService;
     @Resource
     private EntityManagerFactory managerFactory;
-    private Long hot;
-
     //获取所有的问答
     public List<QuestionDto> getAllQuestion(){
        EntityManager entityManager = managerFactory.createEntityManager();
@@ -94,7 +92,7 @@ public class RequireService {
         String sql = "SELECT  r.id as id, r.user_id as userId,r.title,r.description,r.good,r.bad,r.type,r.create_time as createTime," +
                 "r.begin_time as beginTime,r.end_time as endTime,r.category_id as categoryId,r.tag_id as tagId,r.status " +
                 ",u.user_name as userName from tb_require r LEFT JOIN sys_user u on u.id = r.user_id where r.type="+ConstantUtil.questionType+ " " +
-                " and r.status ="+ConstantUtil.hot_status +" order by r.status desc ,r.create_time DESC limit 3 ";
+                " and r.status ="+ConstantUtil.hot_status +" order by r.create_time DESC limit 3 ";
         Query query = entityManager.createNativeQuery(sql);
         query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(QuestionDto.class));
         List rows = query.getResultList();
@@ -125,5 +123,22 @@ public class RequireService {
             require.setStatus(ConstantUtil.normal_status);
             requireDao.save(require);
         }
+    }
+
+    /**
+     * 获取最近更新问答
+     */
+
+    public List<QuestionDto> getLaterQuestion(){
+        EntityManager entityManager = managerFactory.createEntityManager();
+        String sql = "SELECT  r.id as id, r.user_id as userId,r.title,r.description,r.good,r.bad,r.type,r.create_time as createTime," +
+                "r.begin_time as beginTime,r.end_time as endTime,r.category_id as categoryId,r.tag_id as tagId,r.status " +
+                ",u.user_name as userName from tb_require r LEFT JOIN sys_user u on u.id = r.user_id where r.type="+ConstantUtil.questionType+ " " +
+                " and r.status ="+ConstantUtil.normal_status +" order by r.create_time DESC limit 10 ";
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.aliasToBean(QuestionDto.class));
+        List rows = query.getResultList();
+        entityManager.close();
+        return rows;
     }
 }

@@ -45,6 +45,13 @@ public class AjaxController {
         List<QuestionDto> hots = requireService.getHotQuestion();
         return new ResultMessage(ResultMessage.SUCCESS,"请求成功",hots);
     }
+    //
+    @RequestMapping("laterQuestion")
+    @ResponseBody
+    public ResultMessage getLaterQuestion(){
+        List<QuestionDto> laters = requireService.getLaterQuestion();
+        return new ResultMessage(ResultMessage.SUCCESS,"请求成功",laters);
+    }
     //通过ID获取问答
     @RequestMapping("question")
     @ResponseBody
