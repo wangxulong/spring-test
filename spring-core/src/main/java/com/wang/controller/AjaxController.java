@@ -5,6 +5,7 @@ import com.wang.auth.sys.entity.SysUser;
 import com.wang.auth.sys.service.SysUserService;
 import com.wang.dto.CommentDto;
 import com.wang.dto.QuestionDto;
+import com.wang.dto.RequireDto;
 import com.wang.dto.ResultMessage;
 import com.wang.service.CommentService;
 import com.wang.service.RequireService;
@@ -76,6 +77,15 @@ public class AjaxController {
     public ResultMessage replyQuestion(Long userId,Long contentId,String content){
         boolean flag = commentService.ajaxAddQuestionComment(userId,contentId,content);
         return new ResultMessage(ResultMessage.SUCCESS,"添加问答回复成功");
+    }
+
+
+    //获取热点需求
+    @RequestMapping("require/hot")
+    @ResponseBody
+    public ResultMessage hotRequire(){
+        List<RequireDto> results = requireService.getHotRequire();
+        return new ResultMessage(ResultMessage.SUCCESS,"获取成功",results);
     }
 
 

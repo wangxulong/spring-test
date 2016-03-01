@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.json:json:20150729">
     <CLASSES>
-      <root url="jar://F:/study/maven/repo/org/json/json/20150729/json-20150729.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20150729/json-20150729.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://F:/study/maven/repo/org/json/json/20150729/json-20150729-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20150729/json-20150729-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://F:/study/maven/repo/org/json/json/20150729/json-20150729-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20150729/json-20150729-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

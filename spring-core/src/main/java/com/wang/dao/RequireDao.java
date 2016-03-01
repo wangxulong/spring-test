@@ -15,6 +15,6 @@ import java.util.List;
 public interface RequireDao extends BaseDao<TbRequire,Long>{
 
     //获取所有的问答
-    @Query("FROM TbRequire r WHERE r.type=? and r.status=1")
-    public List<TbRequire> getAllQuestion(byte questionType);
+    @Query("FROM TbRequire r WHERE r.type=?1 and r.status=?2")
+    public List<TbRequire> getAllQuestion(byte questionType,byte status);
 }
