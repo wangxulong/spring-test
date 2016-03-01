@@ -101,4 +101,17 @@ public class CommentService {
         commentDao.delete(id);
     }
 
+
+    public boolean ajaxAddQuestionComment(Long userId,Long contentId,String content){
+        TbComment comment = new TbComment();
+        comment.setContentType(ConstantUtil.questionType);
+        comment.setContent(content);
+        comment.setContentId(contentId);
+        comment.setCreateTime(new Date());
+        comment.setUserId(userId);
+        commentDao.save(comment);
+        return true;
+
+    }
+
 }

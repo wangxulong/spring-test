@@ -10,7 +10,9 @@ import com.wang.service.CommentService;
 import com.wang.service.RequireService;
 import com.wang.util.PasswordHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -67,5 +69,14 @@ public class AjaxController {
         List<CommentDto> comments = commentService.getAllQuestionComment(id);
         return new ResultMessage(ResultMessage.SUCCESS,"请求成功",comments);
     }
+
+    //添加回复  id:用户Id  contentId 问答ID  content 问答内容
+    @RequestMapping("question/reply")
+    @ResponseBody
+    public ResultMessage replyQuestion(Long userId,Long contentId,String content){
+        boolean flag = commentService.ajaxAddQuestionComment(userId,contentId,content);
+        return new ResultMessage(ResultMessage.SUCCESS,"添加问答回复成功");
+    }
+
 
 }
